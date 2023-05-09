@@ -1,4 +1,5 @@
 const Registration = require ('../../models/registration');
+const Event = require('../../models/event');
 const { dateToString } = require('../../helpers/date');
 
 module.exports = {
@@ -9,20 +10,31 @@ module.exports = {
             }
 
             const registrations = await Registration.find();
+            
             const parsedRegistrations = registrations
             .sort((a, b) => {
                 return b.updatedAt - a.updatedAt
             }).map(registration => {
-                return {
-                    ...registration._doc,
-                    _id: registration.id,
-                    name: registration.name,
-                    surname: registration.surname,
-                    email: registration.email,
-                    birthDate: dateToString(registration._doc.birthDate),
-                    createdAt: dateToString(registration._doc.createdAt),
-                    updatedAt: dateToString(registration._doc.updatedAt)
-                };
+                const map = Event.findOne({ _id: registration.eventId })
+                    .then((result) => {
+                        return {
+                            ...registration._doc,
+                            _id: registration.id,
+                            name: registration.name,
+                            surname: registration.surname,
+                            email: registration.email,
+                            birthDate: dateToString(registration._doc.birthDate),
+                            event: {
+                                ...result._doc,
+                                _id: result.id,
+                                name: result.name
+                            },
+                            createdAt: dateToString(registration._doc.createdAt),
+                            updatedAt: dateToString(registration._doc.updatedAt)
+                        };
+                    })
+                
+                return map;
             });
 
             return parsedRegistrations;
@@ -34,8 +46,15 @@ module.exports = {
     },
     createRegistration: async (args, req) => {
         try {
+            
             if (!req.isAuth) {
                 throw new Error('Unauthenticated!');
+            }
+
+            const fetchedEvent = await Event.findOne({ _id: args.registrationInput.eventId });
+
+            if (!fetchedEvent) {
+                throw new Error("Event do not exist");
             }
             
             const registration = new Registration({
@@ -43,22 +62,26 @@ module.exports = {
                 surname: args.registrationInput.surname,
                 email: args.registrationInput.email,
                 birthDate: new Date(args.registrationInput.birthDate),
+                eventId: args.registrationInput.eventId
             });
 
             const result = await registration.save();
 
-            const data = {
+            return {
                 ...registration._doc,
                 _id: registration.id,
                 name: result.name,
                 surname: result.surname,
                 email: result.email,
                 birthDate: dateToString(result._doc.birthDate),
+                event: {
+                    ...fetchedEvent._doc,
+                    _id: fetchedEvent.id,
+                    name: fetchedEvent.name
+                },
                 createdAt: dateToString(result._doc.createdAt),
                 updatedAt: dateToString(result._doc.updatedAt)
             }
-
-            return data;
         }
         catch (err) {
             throw err;
@@ -84,19 +107,21 @@ module.exports = {
                 throw new Error('Unauthenticated!');
             }
 
-            const updatedRegistration = new Registration({
-                _id: args.registrationId,
-                name: args.registrationInput.name,
-                surname: args.registrationInput.surname,
-                email: args.registrationInput.email,
-                birthDate: new Date(args.registrationInput.birthDate),
-            })
+            const current = await Registration.findOne({ _id: args.registrationId });
+            if (!current) {
+                throw new Error('User does not exist!');
+            }
 
-            const result = await Registration.findOneAndUpdate(updatedRegistration);
-
+            current.name = args.registrationInput.name;
+            current.surname = args.registrationInput.surname;
+            current.email = args.registrationInput.email;
+            current.birthDate = args.registrationInput.birthDate;
+            
+            const result = await current.save();
+            
             return {
-                ...registration._doc,
-                _id: registration.id,
+                ...result._doc,
+                _id: result.id,
                 name: result.name,
                 surname: result.surname,
                 email: result.email,

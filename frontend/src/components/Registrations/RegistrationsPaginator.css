@@ -1,0 +1,20 @@
+.paginator-wrapper {
+    width: 100%;
+    text-align: center;
+
+    > span {
+        padding: 5px;
+        border: 1px solid chocolate;
+        margin: 2px;
+        border-radius: 5px;
+
+        &:not(.active) {
+            cursor: pointer;
+        }
+
+        &.active {
+            background: rgb(210, 105, 30, 0.5);
+            font-weight: bold;
+        }
+    }
+}

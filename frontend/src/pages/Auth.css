@@ -1,0 +1,38 @@
+.sign-up-row {
+    max-width: 500px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+
+    &:first-child {
+        margin-top: 50px;
+    }
+
+    > label {
+        display: inline-block;
+        width: 20%;
+        line-height: 40px;
+    }
+
+    > input {
+        width: 80%;
+        border: 1px solid chocolate;
+        border-radius: 5px;
+        height: 40px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    > button {
+        padding: 5px 10px;
+        background-color: chocolate;
+        border: 1px solid chocolate;
+        color: white;
+        border-radius: 5px;
+        margin-right: -20%;
+
+        @media screen (max-width: 768) {
+            
+        }
+    }
+}

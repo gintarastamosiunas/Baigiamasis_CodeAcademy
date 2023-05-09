@@ -20,6 +20,10 @@ const regSchema = new Schema(
             type: Date,
             required: true
         },
+        eventId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Event'
+        },
     },
     { timestamps: true }
 );

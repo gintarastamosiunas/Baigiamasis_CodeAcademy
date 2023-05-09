@@ -4,6 +4,9 @@ module.exports = {
 
     events: async (args, req) => {
         try {
+            if (!req.isAuth) {
+                throw new Error('Unauthenticated!');
+            }
             
             const result = await Event.find();
 
@@ -24,7 +27,9 @@ module.exports = {
     },
     createEvent: async (args, req) => {
         try {
-            
+            if (!req.isAuth) {
+                throw new Error('Unauthenticated!');
+            }
 
             const event = new Event({
                 name: args.name

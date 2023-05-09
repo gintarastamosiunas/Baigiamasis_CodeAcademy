@@ -20,6 +20,7 @@ type Registration {
   surname: String!
   email: String!
   birthDate: String!
+  event: Event!
   createdAt: String!
   updatedAt: String!
 }
@@ -39,6 +40,7 @@ input RegistrationInput {
   surname: String!
   email: String!
   birthDate: String!
+  eventId: ID!
 }
 
 type RootQuery {
@@ -49,10 +51,10 @@ type RootQuery {
 
 type RootMutation {
     createUser(userInput: UserInput): User
-    createRegistration(registrationInput: RegistrationInput): Registration
+    createRegistration(registrationInput: RegistrationInput): Registration!
     deleteRegistration(registrationId: ID!): Boolean
-    updateRegistration(registrationId: ID!, registrationInput: RegistrationInput): Registration
-    createEvent(name: String!): Event
+    updateRegistration(registrationId: ID!, registrationInput: RegistrationInput): Registration!
+    createEvent(name: String!): Event!
 }
 
 schema {

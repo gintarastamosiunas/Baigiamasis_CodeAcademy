@@ -1,0 +1,23 @@
+.main-header {
+    padding: 10px 30px;
+    background-color: chocolate;
+
+    .navigation-list {
+        display: inline-flex;
+        list-style-type: none;
+        width: 100%;
+        justify-content: flex-end;
+        box-sizing: border-box;
+
+        .navigation {
+            list-style-type: none;
+            margin-left: 10px;
+            text-decoration: none;
+
+            > a {
+                text-decoration: none;
+                color: white;
+            }
+        }
+    }
+}

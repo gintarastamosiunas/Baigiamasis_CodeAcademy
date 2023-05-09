@@ -1,0 +1,60 @@
+.event-row {
+    max-width: 500px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+
+    &:first-child {
+        margin-top: 70px;
+    }
+
+    > label {
+        display: inline-block;
+        width: 20%;
+        line-height: 40px;
+    }
+
+    > input {
+        width: 80%;
+        border: 1px solid chocolate;
+        border-radius: 5px;
+        height: 40px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    > button {
+        padding: 5px 10px;
+        background-color: chocolate;
+        border: 1px solid chocolate;
+        color: white;
+        border-radius: 5px;
+        margin-left: 10px;
+    }
+}
+
+
+.event-table {
+    display: block;
+    padding: 0;
+    list-style-type: none;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+    margin: 50px auto 0 auto;
+
+    .event-list-item {
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+        border-bottom: 1px solid rgb(210, 105, 30, 0.5);
+        
+        &:first-child {
+            font-weight: bold;
+            padding: 5px 0 10px 5px;
+            margin-bottom: 5px;
+            background: rgb(210, 105, 30, 0.5);
+            border-bottom: 0 none;
+        }
+    }
+}
