@@ -14,6 +14,7 @@ const registrationsList = props => {
 
     return <ul className='registration-table'>
         <li className="registration-list-item">
+            <div>Event</div>
             <div>Name</div>
             <div>Surname</div>
             <div>Email</div>
@@ -24,6 +25,7 @@ const registrationsList = props => {
         {
             props.registrations.map(registration => (
                 <li className='registration-list-item' key={registration._id}>
+                    <div>{registration.event.name}</div>
                     <div>{registration.name}</div>
                     <div>{registration.surname}</div>
                     <div>{registration.email}</div>

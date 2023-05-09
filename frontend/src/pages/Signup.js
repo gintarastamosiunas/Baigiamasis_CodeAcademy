@@ -77,7 +77,7 @@ class SignupPage extends Component {
 
         if (this.state.registered) {
             return (
-                <div className="register-success">
+                <div className="sign-up-success">
                     <h1>
                         Registration for user {this.state.email} was successful. You can now <NavLink to='/auth'>Log in</NavLink>
                     </h1>

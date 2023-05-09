@@ -52,7 +52,6 @@ module.exports = {
             }
 
             const fetchedEvent = await Event.findOne({ _id: args.registrationInput.eventId });
-
             if (!fetchedEvent) {
                 throw new Error("Event do not exist");
             }
@@ -107,6 +106,11 @@ module.exports = {
                 throw new Error('Unauthenticated!');
             }
 
+            const fetchedEvent = await Event.findOne({ _id: args.registrationInput.eventId });
+            if (!fetchedEvent) {
+                throw new Error("Event do not exist");
+            }
+
             const current = await Registration.findOne({ _id: args.registrationId });
             if (!current) {
                 throw new Error('User does not exist!');
@@ -116,6 +120,7 @@ module.exports = {
             current.surname = args.registrationInput.surname;
             current.email = args.registrationInput.email;
             current.birthDate = args.registrationInput.birthDate;
+            current.eventId = args.registrationInput.eventId;
             
             const result = await current.save();
             
@@ -126,6 +131,11 @@ module.exports = {
                 surname: result.surname,
                 email: result.email,
                 birthDate: dateToString(result.birthDate),
+                event: {
+                    ...fetchedEvent._doc,
+                    _id: fetchedEvent.id,
+                    name: fetchedEvent.name
+                },
                 createdAt: dateToString(result._doc.createdAt),
                 updatedAt: dateToString(result._doc.updatedAt)
             }

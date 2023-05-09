@@ -176,6 +176,7 @@ class RegistrationPage extends Component {
                 surname: resData.data.createRegistration.surname,
                 email: resData.data.createRegistration.email,
                 birthDate: resData.data.createRegistration.birthDate,
+                event: resData.data.createRegistration.event
             };
 
             this.setState({
@@ -237,11 +238,13 @@ class RegistrationPage extends Component {
         const name = this.name.current.value;
         const email = this.email.current.value;
         const birthDate = this.birthDate.current.value;
+        const eventId = this.selectedEvent.current.value;
 
         if (email.trim().length === 0 || 
             surname.trim().length === 0 ||
             name.trim().length === 0 ||
-            birthDate.trim().length === 0) 
+            birthDate.trim().length === 0 ||
+            eventId.trim().length === 0) 
         {
             return;
         }
@@ -249,20 +252,25 @@ class RegistrationPage extends Component {
         const request = {
             query: `
                 mutation UpdateRegistration {
-                    updateRegistration(registrationId: "${this.state.currentRegistration._id}" registrationInput: {
+                    updateRegistration(registrationId: "${this.state.currentRegistration._id}", registrationInput: {
                         name: "${name}"
-                        surname:"${surname}"
+                        surname: "${surname}"
                         email: "${email}"
                         birthDate: "${birthDate}"
-                    }) {
+                        eventId: "${eventId}"
+                      }) {
                         _id
                         name
                         surname
                         email
                         birthDate
+                        event {
+                          _id
+                          name
+                        }
                         createdAt
                         updatedAt
-                    }
+                      }
                 }
             `
         }
@@ -315,6 +323,7 @@ class RegistrationPage extends Component {
             this.surname.current.value = this.state.currentRegistration.surname;
             this.email.current.value = this.state.currentRegistration.email;
             this.birthDate.current.value = this.state.currentRegistration.birthDate.substring(0, 10);
+            this.selectedEvent.current.value = this.state.currentRegistration.event._id;
         }
     }
 
