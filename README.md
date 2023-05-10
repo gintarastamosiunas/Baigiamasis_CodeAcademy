@@ -1,29 +1,31 @@
-# GraphQL + React Event Booking API
-This code belongs to a tutorial series: [https://github.com/academind/yt-graphql-react-event-booking-api.git](https://github.com/academind/yt-graphql-react-event-booking-api.git)
+# Code Academy baigiamasis darbas "Renginiu registravimo sistema" React.js + Node.js + MongoDB
 
-Learn how to build a GraphQL API (with Node.js) and a React.js frontend from scratch in this series.
+Projektas patalpintas: (https://github.com/gintarastamosiunas/Baigiamasis_CodeAcademy).
 
-# Usage
-Choose the right branch in this repository to get the code for the different parts of the series.
+## Darbo BackEnd paleidimas:
 
-Install all dependencies
-```sh
-npm install
-```
+### `npm install`
 
-Install latest node js version
+### `npm start`
 
-Install mongodb 
-```sh
-https://www.mongodb.com/docs/manual/installation/
-```
+pasileis BackEnd'as: http://localhost:8001/graphql?
 
-Optional: Seed database with default user 
-```sh
-npm run seeds
-```
+## Darbo FrontEnd paleidimas:
 
-Run the server
-```sh
-npm start
-```
+### `cd frontend`
+
+### `npm install`
+
+### `npm start`
+Pasileis FrontEndas development mode: http://localhost:3000/register 
+
+Programa naudoja Mongo DB duomenu baze. https://www.mongodb.com/docs/manual/installation/
+Mongo Db instaliavimo procesas:
+ 
+### `brew install mongodb`
+### `brew install mongodb-compass`
+
+Projektinio darbo uzduotis:
+Sukurkite React.js + Node.js + MongoDB programą, kuri leistų, renginių organizavimu užsiimančiai įmonei, registruoti telefonu paskambinusius asmenis į renginį. Renginių organizatorius, prisijungęs prie programos, matys: a) Registracijos formą (joje nurodoma: i) vardas ir pavardė; ii) el.paštas; iii) amžius;) ir b) užsiregistravusių vartotojų sąrašą (nurodoma lentelė su vartotojo vardu ir pavarde, el. paštu, gimimo data, administravimo mygtukais (atnaujinti ir ištrinti vartotojus)). Rodoma iki 10 vartotojų, esant daugiau atsiranda puslapiavimas ("pagination")).
+
+
