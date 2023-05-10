@@ -1,3 +1,12 @@
+button {
+    padding: 5px 10px;
+    background-color: chocolate;
+    border: 1px solid chocolate;
+    color: white;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
 .registration-row {
     max-width: 500px;
     margin: 10px auto;
@@ -27,27 +36,10 @@
 
     > div {
         margin-right: -20%;
-
-        > button {
-            padding: 5px 10px;
-            background-color: chocolate;
-            border: 1px solid chocolate;
-            color: white;
-            border-radius: 5px;
-            margin-left: 10px;
-        }
     }
 }
 
 .registration-controls {
     padding: 0 40px;
     margin-top: 40px;
-
-    > button {
-        padding: 5px 10px;
-        background-color: chocolate;
-        border: 1px solid chocolate;
-        color: white;
-        border-radius: 5px;
-    }
 }

@@ -1,3 +1,12 @@
+button {
+    padding: 5px 10px;
+    background-color: chocolate;
+    border: 1px solid chocolate;
+    color: white;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
 .event-row {
     max-width: 500px;
     margin: 10px auto;
@@ -22,15 +31,6 @@
         padding: 10px;
         box-sizing: border-box;
     }
-
-    > button {
-        padding: 5px 10px;
-        background-color: chocolate;
-        border: 1px solid chocolate;
-        color: white;
-        border-radius: 5px;
-        margin-left: 10px;
-    }
 }
 
 
@@ -48,6 +48,8 @@
         text-align: center;
         padding: 5px;
         border-bottom: 1px solid rgb(210, 105, 30, 0.5);
+        display: flex;
+        justify-content: space-between;
         
         &:first-child {
             font-weight: bold;

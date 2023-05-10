@@ -1,4 +1,5 @@
 const Event = require ('../../models/event');
+const Registration = require('../../models/registration');
 
 module.exports = {
 
@@ -42,6 +43,21 @@ module.exports = {
                 _id: event.id,
                 name: result.name
             }
+        }
+        catch (err) {
+            throw err;
+        }
+    },
+    deleteEvent: async (args, req) => {
+        try {
+            if (!req.isAuth) {
+                throw new Error('Unauthenticated!');
+            }
+
+            await Registration.deleteMany({ eventId: args.eventId});
+            await Event.deleteOne({_id: args.eventId});
+
+            return true;
         }
         catch (err) {
             throw err;

@@ -97,6 +97,43 @@ class EventPage extends Component {
         })
     }
 
+    deleteEvent = (eventId) => {
+        const request = {
+            query: `
+                mutation {
+                    deleteEvent(eventId:"${eventId}")
+                }
+            `
+        }
+
+        fetch('http://localhost:8001/graphql', {
+            method: 'POST',
+            body: JSON.stringify(request),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + this.context.token
+            }
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .then((data) => {
+            if (data.errors && data.errors.length) {
+                console.log(data.errors)
+                return;
+            }
+
+            this.setState(prevState => {
+                const updatedEvents = [...prevState.events].filter(e => e._id !== eventId);
+
+                return { events: updatedEvents };
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
     componentDidMount() {
         this.fetchEvents();
     }
@@ -125,7 +162,8 @@ class EventPage extends Component {
                     {
                         this.state.events.map(event => (
                             <li className='event-list-item' key={event._id}>
-                                {event.name}
+                                <span> {event.name} </span>
+                                <button onClick={() => this.deleteEvent(event._id)}>Delete</button>
                             </li>
                         ))
                     }

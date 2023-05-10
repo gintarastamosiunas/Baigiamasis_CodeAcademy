@@ -55,6 +55,7 @@ type RootMutation {
     deleteRegistration(registrationId: ID!): Boolean
     updateRegistration(registrationId: ID!, registrationInput: RegistrationInput): Registration!
     createEvent(name: String!): Event!
+    deleteEvent(eventId: ID!): Boolean
 }
 
 schema {
