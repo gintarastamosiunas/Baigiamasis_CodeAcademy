@@ -16,6 +16,8 @@ pasileis BackEnd'as: http://localhost:8001/graphql?
 
 ### `npm install`
 
+
+
 ### `npm start`
 Pasileis FrontEndas development mode: http://localhost:3000/register 
 
